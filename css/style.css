@@ -149,7 +149,7 @@ body {
   justify-content: center;
   position: relative;
   background-repeat: no-repeat;
-  background-image: url(/img/hero__background.jpg);
+  background-image: url(img/hero__background.jpg);
   background-position: center;
   min-height: 90vh;
   align-items: center;
@@ -258,13 +258,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .itemBox:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 14px rgba(0,0,0,0.3);
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
 }
 
 .itemBox__img {
@@ -457,7 +457,7 @@ body {
   border-radius: 0.5rem;
   overflow: hidden;
   border: 1px solid #3b372e;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .mapzone__framewrap iframe {
