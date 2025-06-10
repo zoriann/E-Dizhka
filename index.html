@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Діжка Пива</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__top">
+        <div class="header__contact">
+          <span class="header__phone">📞 +328 (000) 123-45-67</span>
+          <span class="header__hours">Працюємо щодня з 10:00 до 22:00</span>
+        </div>
+        <div class="header__user-links">
+          <a href="index.html" class="header__link">Головна</a>
+          <a href="catalog.html" class="header__link">Каталог</a>
+          <a href="profile.html" class="header__link">Мій кабінет</a>
+          <a href="cart.html" class="header__link">Кошик</a>
+        </div>
+      </div>
+      <div class="header__main">
+        <div class="header__left">
+          <button class="menu-toggle">☰</button>
+        </div>
+        <div class="header__center">
+          <a href="index.html" class="header__brand">ДІЖКА ПИВА</a>
+          <p class="header__slogan">Традиційний смак, сучасна подача</p>
+        </div>
+        <div class="header__right">
+          <a
+            href="#"
+            class="header__icon header__icon--search"
+            aria-label="Пошук"
+          ></a>
+          <a
+            href="#"
+            class="header__icon header__icon--cart"
+            aria-label="Кошик"
+          >
+            <span class="header__cart-count">0</span>
+          </a>
+        </div>
+      </div>
+    </header>
+    <section class="hero">
+      <div class="hero__container">
+        <h2 class="hero__upper-text">Найкращий</h2>
+        <h1 class="hero__middle-text">Пиивний Магазин</h1>
+        <h2 class="hero__lower-text">Вітає Вас!</h2>
+        <h3 class="hero__text">В нас є як крафтове так і звичайне пиво!</h3>
+        <h3 class="hero__call">Тел:380 96-765-3800</h3>
+        <a href="catalog.html" class="hero__button">Замовити Онлайн</a>
+      </div>
+    </section>
+    <section class="products__wrap">
+      <h2 class="products__section-title">Популярні товари</h2>
+      <div class="products__list" id="product-list">
+        <!-- JS вставить товарні картки сюди -->
+      </div>
+    </section>
+    <section class="aboutus__wrap">
+      <h2 class="aboutus__heading">Хто ми такі?</h2>
+      <p class="aboutus__text">
+        Магазин <span class="aboutus__highlight">«Діжка Пива»</span> народився з
+        ідеї, що справжній смак — це не бренд, а відчуття. Колись один наш друг
+        привіз з Карпат банку домашнього пива в дерев’яній бочці. Ми відкрили її
+        просто на кухні, і той аромат затьмарив усе, що ми пили до цього.
+        <br /><br />
+        Сьогодні ми не просто продаємо пиво — ми збираємо
+        <span class="aboutus__highlight">рідкісні сорти</span> з маленьких
+        броварень, допомагаємо людям знайти свій смак і доводимо, що навіть
+        звичайна пляшка може стати подією. Тут усе — для поціновувачів, і для
+        тих, хто шукає щось справжнє.
+      </p>
+    </section>
+    <section class="contactinfo__zone">
+      <div class="contactinfo__imagebox">
+        <img src="/img/contactinfo__img.jpg" alt="Інтер'єр магазину" />
+      </div>
+      <div class="contactinfo__textblock">
+        <h2 class="contactinfo__headline">Відчуй справжній смак пива</h2>
+
+        <div class="contactinfo__item">
+          <span class="contactinfo__label">Графік роботи:</span>
+          Пн–Пт: 10:00 – 22:00<br />
+          Сб–Нд: 11:00 – 21:00<br />
+        </div>
+
+        <div class="contactinfo__item">
+          <span class="contactinfo__label">Адреса:</span>
+          вул. Заводська, 1<br />
+          м. Оржів, Україна<br />
+          79000
+        </div>
+
+        <div class="contactinfo__item">
+          <span class="contactinfo__label">Телефон:</span>
+          +38 (096) 765-38-00
+        </div>
+      </div>
+    </section>
+    <section class="mapzone__section">
+      <h2 class="mapzone__label">Нас легко знайти</h2>
+      <div class="mapzone__framewrap">
+        <iframe
+          src="https://www.google.com/maps?q=Заводська+1,+Оржів,+Рівненська+область&output=embed"
+          width="100%"
+          height="400"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
+        </iframe>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__about">
+          <h3 class="footer__title">Діжка Пива</h3>
+          <p class="footer__text">Магазин справжнього смаку. <br>
+             Працюємо для вас щодня з 10:00 до 22:00.</p>
+        </div>
+    
+        <div class="footer__links">
+          <h4 class="footer__subtitle">Розділи</h4>
+          <ul class="footer__list">
+            <li><a href="index.html" class="footer__link">Головна</a></li>
+            <li><a href="catalog.html" class="footer__link">Каталог</a></li>
+            <li><a href="profile.html" class="footer__link">Мій кабінет</a></li>
+            <li><a href="checkout.html" class="footer__link">Список бажань</a></li>
+          </ul>
+        </div>
+    
+        <div class="footer__contacts">
+          <h4 class="footer__subtitle">Контакти</h4>
+          <p class="footer__phone">📞 +38 (096) 765-3800</p>
+          <p class="footer__address">Рівненська обл., Оржів, вул. Заводська, 1</p>
+        </div>
+      </div>
+    
+      <div class="footer__bottom">
+        <p>© 2025 Діжка Пива. Усі права захищено.</p>
+      </div>
+    </footer>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
