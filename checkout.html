@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Оформлення замовлення — Діжка Пива</title>
+  <link rel="stylesheet" href="css/checkout.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header__top">
+      <div class="header__contact">
+        <span class="header__phone">📞 +328 (000) 123-45-67</span>
+        <span class="header__hours">Працюємо щодня з 10:00 до 22:00</span>
+      </div>
+      <div class="header__user-links">
+        <a href="index.html" class="header__link">Головна</a>
+        <a href="catalog.html" class="header__link">Каталог</a>
+        <a href="cart.html" class="header__link">Кошик</a>
+      </div>
+    </div>
+    <div class="header__main">
+      <a href="index.html" class="header__brand">ДІЖКА ПИВА</a>
+      <p class="header__slogan">Справжнє пиво — справжні замовлення</p>
+    </div>
+  </header>
+
+  <main class="checkout-container">
+    <h2>Оформлення замовлення</h2>
+
+    <form id="checkout-form">
+      <label for="name">Ваше ім’я:</label>
+      <input type="text" id="name" required placeholder="Іван Петрович" />
+
+      <label for="phone">Номер телефону:</label>
+      <input type="tel" id="phone" required placeholder="+380..." />
+
+      <label for="comment">Коментар до замовлення (необов’язково):</label>
+      <textarea id="comment" rows="3" placeholder="Доставка після 18:00..."></textarea>
+
+      <button type="submit">Підтвердити замовлення</button>
+
+      <p id="order-status" class="order-status"></p>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__bottom">
+      <p>© 2025 Діжка Пива. Пийте з розумом 🍺</p>
+    </div>
+  </footer>
+
+  <script src="js/checkout.js"></script>
+</body>
+</html>
