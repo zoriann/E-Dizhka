@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const response = await fetch(
-      '"https://diplombackend-production-a7f8.up.railway.app/api/products"'
+      'https://diplombackend-production-a7f8.up.railway.app/api/products'
     )
     const products = await response.json()
 
