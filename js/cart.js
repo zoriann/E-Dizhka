@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cartData.length === 0) {
       cartItemsContainer.innerHTML = `
-          <div class="cart__empty">
-            <h2 class="cart__empty-title">Кошик порожній</h2>
-            <p class="cart__empty-text">Ви ще нічого не додали до замовлення. Перейдіть до <a href="catalog.html">каталогу</a>, щоб обрати товари.</p>
-          </div>
-        `
+        <div class="cart__empty">
+          <h2 class="cart__empty-title">Кошик порожній</h2>
+          <p class="cart__empty-text">Ви ще нічого не додали до замовлення. Перейдіть до <a href="catalog.html">каталогу</a>, щоб обрати товари.</p>
+        </div>
+      `
       totalPriceEl.textContent = '0 ₴'
       return
     }
@@ -27,12 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const div = document.createElement('div')
       div.className = 'cart__item'
       div.innerHTML = `
-          <div class="cart__item-info">
-            <span class="cart__item-name">${item.name}</span>
-            <span class="cart__item-price">${item.price} ₴</span>
-          </div>
-          <button class="cart__item-remove" data-index="${index}">Видалити</button>
-        `
+        <div class="cart__item-info">
+          <span class="cart__item-name">${item.name}</span>
+          <span class="cart__item-price">${item.price} ₴</span>
+        </div>
+        <button class="cart__item-remove" data-index="${index}">Видалити</button>
+      `
       cartItemsContainer.appendChild(div)
     })
 
@@ -54,9 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   confirmOrderBtn.addEventListener('click', () => {
-    alert('Замовлення підтверджено! Дякуємо 🥳')
-    localStorage.removeItem('cart')
-    loadCart()
+    // Нічого не очищаємо тут — перейдемо до чекауту
+    window.location.href = 'checkout.html'
   })
 
   loadCart()
