@@ -1,9 +1,14 @@
-<!DOCTYPE html>
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
-    <title>Вхід на сайт</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Авторизація — Діжка Пива</title>
+    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/auth.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header class="header">
@@ -27,42 +32,43 @@
           <a href="index.html" class="header__brand">ДІЖКА ПИВА</a>
           <p class="header__slogan">Традиційний смак, сучасна подача</p>
         </div>
-        <div class="header__right">
-          <a
-            href="#"
-            class="header__icon header__icon--search"
-            aria-label="Пошук"
-          ></a>
-          <a
-            href="#"
-            class="header__icon header__icon--cart"
-            aria-label="Кошик"
-          >
-            <span class="header__cart-count">0</span>
-          </a>
-        </div>
+        <div class="header__right"></div>
       </div>
     </header>
-      <div class="auth-bg">
-        <div class="auth-container">
-          <h1>Вхід до акаунту</h1>
-          <form onsubmit="handleLogin(event)">
-            <input type="text" id="username" placeholder="Логін" required>
-            <input type="password" id="password" placeholder="Пароль" required>
-            <button type="submit">Увійти</button>
-            <p id="message"></p>
-          </form>
+
+    <main class="auth-page">
+      <div class="auth-form">
+        <h2>Вхід у кабінет</h2>
+        <form onsubmit="handleLogin(event)">
+          <label for="username">Логін:</label>
+          <input type="text" id="username" placeholder="Введіть логін" required />
+
+          <label for="password">Пароль:</label>
+          <input type="password" id="password" placeholder="********" required />
+
+          <button type="submit">Увійти</button>
+          <p id="message"></p>
+        </form>
+        <div class="auth-decor">
+          🍺 Повернімося до справжнього смаку — тільки зареєстрованим!
         </div>
       </div>
-    
-      <script src="js/auth.js"></script>
-      <script>
-        function handleLogin(e) {
-          e.preventDefault();
-          const u = document.getElementById("username").value;
-          const p = document.getElementById("password").value;
-          loginUser(u, p);
-        }
-      </script>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__bottom">
+        <p>© 2025 Діжка Пива. Усі права захищено.</p>
+      </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script>
+      function handleLogin(e) {
+        e.preventDefault();
+        const u = document.getElementById("username").value;
+        const p = document.getElementById("password").value;
+        loginUser(u, p);
+      }
+    </script>
   </body>
 </html>
