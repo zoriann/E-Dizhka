@@ -118,4 +118,9 @@
 .cart__empty-text {
   color: #c7bb92;
   margin-top: 0.5rem;
+  text-decoration: none;
+}
+.cart__empty-text:hover {
+  color: #d4b36a; /* Золотистий при наведенні */
+  text-decoration: underline;
 }
