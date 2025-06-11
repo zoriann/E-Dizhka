@@ -118,9 +118,13 @@
 .cart__empty-text {
   color: #c7bb92;
   margin-top: 0.5rem;
-  text-decoration: none;
 }
-.cart__empty-text:hover {
+.catalog__link {
+  color: #ead89c;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+.catalog__link:hover {
   color: #d4b36a; /* Золотистий при наведенні */
   text-decoration: underline;
 }

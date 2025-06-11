@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cartItemsContainer.innerHTML = `
         <div class="cart__empty">
           <h2 class="cart__empty-title">Кошик порожній</h2>
-          <p class="cart__empty-text">Ви ще нічого не додали до замовлення. Перейдіть до <a href="catalog.html">каталогу</a>, щоб обрати товари.</p>
+          <p class="cart__empty-text">Ви ще нічого не додали до замовлення. Перейдіть до <a class="catalog__link" href="catalog.html">каталогу</a>, щоб обрати товари.</p>
         </div>
       `
       totalPriceEl.textContent = '0 ₴'
