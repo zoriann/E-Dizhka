@@ -5,7 +5,7 @@
   background-color: #2e271d;
   color: #fef6d0;
   border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .cart__title {
@@ -48,7 +48,7 @@
 
 .cart__item-remove {
   background-color: #8a2424;
-  color: white;
+  color: #d3b77f;
   border: none;
   border-radius: 0.4rem;
   padding: 0.5rem 1rem;
@@ -89,7 +89,7 @@
 
 .cart__btn.clear {
   background-color: #444034;
-  color: #fef6d0;
+  color: #d3b77f;
 }
 
 .cart__btn.clear:hover {

@@ -54,9 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   confirmOrderBtn.addEventListener('click', () => {
-    // Нічого не очищаємо тут — перейдемо до чекауту
+    const cartData = JSON.parse(localStorage.getItem('cart')) || []
+
+    if (!cartData.length) {
+      alert(
+        '😕 Ваш кошик порожній. Додайте товари, перш ніж оформляти замовлення.'
+      )
+      return
+    }
+
     window.location.href = 'checkout.html'
   })
+  
 
   loadCart()
 })
