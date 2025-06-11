@@ -1,71 +1,81 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const cartItemsContainer = document.getElementById('cartItems')
-  const totalPriceEl = document.getElementById('totalPrice')
-  const clearCartBtn = document.getElementById('clearCart')
-  const confirmOrderBtn = document.getElementById('confirmOrder')
+document.addEventListener('DOMContentLoaded', async () => {
+  const container = document.getElementById('catalogItems')
 
-  function loadCart() {
-    const cartData = JSON.parse(localStorage.getItem('cart')) || []
-    cartItemsContainer.innerHTML = ''
+  try {
+    const response = await fetch(
+      'https://diplombackend-production-a7f8.up.railway.app/api/products'
+    )
+    const products = await response.json()
 
-    if (cartData.length === 0) {
-      cartItemsContainer.innerHTML = `
-        <div class="cart__empty">
-          <h2 class="cart__empty-title">Кошик порожній</h2>
-          <p class="cart__empty-text">Ви ще нічого не додали до замовлення. Перейдіть до <a class="catalog__link" href="catalog.html">каталогу</a>, щоб обрати товари.</p>
-        </div>
-      `
-      totalPriceEl.textContent = '0 ₴'
-      return
-    }
-
-    let total = 0
-
-    cartData.forEach((item, index) => {
-      total += parseFloat(item.price)
-
-      const div = document.createElement('div')
-      div.className = 'cart__item'
-      div.innerHTML = `
-        <div class="cart__item-info">
-          <span class="cart__item-name">${item.name}</span>
-          <span class="cart__item-price">${item.price} ₴</span>
-        </div>
-        <button class="cart__item-remove" data-index="${index}">Видалити</button>
-      `
-      cartItemsContainer.appendChild(div)
-    })
-
-    totalPriceEl.textContent = `${total.toFixed(2)} ₴`
-
-    document.querySelectorAll('.cart__item-remove').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const i = e.target.dataset.index
-        cartData.splice(i, 1)
-        localStorage.setItem('cart', JSON.stringify(cartData))
-        loadCart()
-      })
-    })
+    renderProducts(products, container)
+    handleFilter(products)
+  } catch (err) {
+    container.innerHTML =
+      '<p class="error">❌ Помилка при завантаженні товарів.</p>'
+    console.error(err)
   }
-
-  clearCartBtn.addEventListener('click', () => {
-    localStorage.removeItem('cart')
-    loadCart()
-  })
-
-  confirmOrderBtn.addEventListener('click', () => {
-    const cartData = JSON.parse(localStorage.getItem('cart')) || []
-
-    if (!cartData.length) {
-      alert(
-        '😕 Ваш кошик порожній. Додайте товари, перш ніж оформляти замовлення.'
-      )
-      return
-    }
-
-    window.location.href = 'checkout.html'
-  })
-  
-
-  loadCart()
 })
+
+function renderProducts(products, container, category = 'all') {
+  container.innerHTML = ''
+
+  const filtered =
+    category === 'all'
+      ? products
+      : products.filter((p) => p.category === category)
+
+  filtered.forEach((product) => {
+    const card = document.createElement('div')
+    card.className = 'catalog__item'
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.name}" class="catalog__img">
+      <div class="catalog__info">
+        <h3>${product.name}</h3>
+        <p>${product.price} ₴</p>
+        <button data-id="${product.id}">До кошика</button>
+      </div>
+    `
+    container.appendChild(card)
+  })
+
+  setupAddToCart(filtered)
+}
+
+function setupAddToCart(products) {
+  const buttons = document.querySelectorAll('.catalog__item button')
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.dataset.id
+      const product = products.find((p) => p.id == id)
+      if (!product) return
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || []
+      const existing = cart.find((i) => i.id == id)
+
+      if (existing) {
+        existing.quantity += 1
+      } else {
+        cart.push({ ...product, quantity: 1 })
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart))
+      alert(`✅ ${product.name} додано до кошика!`)
+    })
+  })
+}
+
+function handleFilter(products) {
+  const buttons = document.querySelectorAll('.catalog__btn')
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelector('.catalog__btn.active')?.classList.remove('active')
+      btn.classList.add('active')
+
+      const category = btn.dataset.category
+      const container = document.getElementById('catalogItems')
+      renderProducts(products, container, category)
+    })
+  })
+}
