@@ -43,22 +43,26 @@
         </div>
       </div>
     </header>
-    <h1>Вхід</h1>
-
-    <form onsubmit="handleLogin(event)">
-      <input type="text" id="username" placeholder="Логін" required />
-      <input type="password" id="password" placeholder="Пароль" required />
-      <button type="submit">Увійти</button>
-    </form>
-
-    <script src="js/auth.js"></script>
-    <script>
-      function handleLogin(e) {
-        e.preventDefault()
-        const u = document.getElementById('username').value
-        const p = document.getElementById('password').value
-        loginUser(u, p)
-      }
-    </script>
+      <div class="auth-bg">
+        <div class="auth-container">
+          <h1>Вхід до акаунту</h1>
+          <form onsubmit="handleLogin(event)">
+            <input type="text" id="username" placeholder="Логін" required>
+            <input type="password" id="password" placeholder="Пароль" required>
+            <button type="submit">Увійти</button>
+            <p id="message"></p>
+          </form>
+        </div>
+      </div>
+    
+      <script src="js/auth.js"></script>
+      <script>
+        function handleLogin(e) {
+          e.preventDefault();
+          const u = document.getElementById("username").value;
+          const p = document.getElementById("password").value;
+          loginUser(u, p);
+        }
+      </script>
   </body>
 </html>
