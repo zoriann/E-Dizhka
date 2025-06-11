@@ -149,7 +149,7 @@ body {
   justify-content: center;
   position: relative;
   background-repeat: no-repeat;
-  background-image: url(img/hero__background.jpg);
+  background-image: url(../img/hero__background.jpg);
   background-position: center;
   min-height: 90vh;
   align-items: center;
