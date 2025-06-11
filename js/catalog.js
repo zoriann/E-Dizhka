@@ -1,118 +1,81 @@
-const catalogItems = [
-  {
-    id: 'beer001',
-    name: 'Пиво Світле «Бочкове»',
-    price: '45 ₴',
-    category: 'beer',
-    image: '/img/items/bochkove.jpg',
-  },
-  {
-    id: 'beer002',
-    name: 'Крафт IPA «Дике Поле»',
-    price: '65 ₴',
-    category: 'beer',
-    image: '/img/items/dyke-pole.jpg',
-  },
-  {
-    id: 'snack001',
-    name: 'Сухарики з часником',
-    price: '25 ₴',
-    category: 'snacks',
-    image: '/img/items/suharyky.jpg',
-  },
-  {
-    id: 'other001',
-    name: 'Квас «Хлібний»',
-    price: '30 ₴',
-    category: 'other',
-    image: '/img/items/kvass.jpg',
-  },
-  {
-    id: 'other001',
-    name: 'Квас «Хлібний»',
-    price: '30 ₴',
-    category: 'other',
-    image: '/img/items/kvass.jpg',
-  },
-  {
-    id: 'beer001',
-    name: 'Пиво Світле «Бочкове»',
-    price: '45 ₴',
-    category: 'beer',
-    image: '/img/items/bochkove.jpg',
-  },
-  {
-    id: 'beer002',
-    name: 'Крафт IPA «Дике Поле»',
-    price: '65 ₴',
-    category: 'beer',
-    image: '/img/items/dyke-pole.jpg',
-  },
-  {
-    id: 'snack001',
-    name: 'Сухарики з часником',
-    price: '25 ₴',
-    category: 'snacks',
-    image: '/img/items/suharyky.jpg',
-  },
-  {
-    id: 'other001',
-    name: 'Квас «Хлібний»',
-    price: '30 ₴',
-    category: 'other',
-    image: '/img/items/kvass.jpg',
-  },
-  {
-    id: 'other001',
-    name: 'Квас «Хлібний»',
-    price: '30 ₴',
-    category: 'other',
-    image: '/img/items/kvass.jpg',
-  },
-]
+document.addEventListener('DOMContentLoaded', async () => {
+  const container = document.getElementById('catalogItems')
 
-const container = document.getElementById('catalogItems')
-const buttons = document.querySelectorAll('.catalog__btn')
+  try {
+    const response = await fetch(
+      'https://diplombackend.railway.app/api/products'
+    )
+    const products = await response.json()
 
-function renderItems(category = 'all') {
-  container.classList.add('fade-out')
-
-  setTimeout(() => {
-    container.innerHTML = ''
-
-    const filtered =
-      category === 'all'
-        ? catalogItems
-        : catalogItems.filter((item) => item.category === category)
-
-    filtered.forEach((item) => {
-      const div = document.createElement('div')
-      div.className = 'catalog__card'
-      div.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" />
-          <h3 class="catalog__card-name">${item.name}</h3>
-          <div class="catalog__card-price">${item.price}</div>
-          <button class="catalog__card-button" data-id="${item.id}">До кошика</button>
-        `
-      container.appendChild(div)
-    })
-
-    container.classList.remove('fade-out')
-    container.classList.add('fade-in')
-
-    setTimeout(() => {
-      container.classList.remove('fade-in')
-    }, 300)
-  }, 200)
-}
-
-buttons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    buttons.forEach((b) => b.classList.remove('active'))
-    btn.classList.add('active')
-    const cat = btn.dataset.category
-    renderItems(cat)
-  })
+    renderProducts(products, container)
+    handleFilter(products)
+  } catch (err) {
+    container.innerHTML =
+      '<p class="error">❌ Помилка при завантаженні товарів.</p>'
+    console.error(err)
+  }
 })
 
-renderItems()
+function renderProducts(products, container, category = 'all') {
+  container.innerHTML = ''
+
+  const filtered =
+    category === 'all'
+      ? products
+      : products.filter((p) => p.category === category)
+
+  filtered.forEach((product) => {
+    const card = document.createElement('div')
+    card.className = 'catalog__item'
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.name}" class="catalog__img">
+      <div class="catalog__info">
+        <h3>${product.name}</h3>
+        <p>${product.price} ₴</p>
+        <button data-id="${product.id}">До кошика</button>
+      </div>
+    `
+    container.appendChild(card)
+  })
+
+  setupAddToCart(filtered)
+}
+
+function setupAddToCart(products) {
+  const buttons = document.querySelectorAll('.catalog__item button')
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.dataset.id
+      const product = products.find((p) => p.id == id)
+      if (!product) return
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || []
+      const existing = cart.find((i) => i.id == id)
+
+      if (existing) {
+        existing.quantity += 1
+      } else {
+        cart.push({ ...product, quantity: 1 })
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart))
+      alert(`✅ ${product.name} додано до кошика!`)
+    })
+  })
+}
+
+function handleFilter(products) {
+  const buttons = document.querySelectorAll('.catalog__btn')
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelector('.catalog__btn.active')?.classList.remove('active')
+      btn.classList.add('active')
+
+      const category = btn.dataset.category
+      const container = document.getElementById('catalogItems')
+      renderProducts(products, container, category)
+    })
+  })
+}
