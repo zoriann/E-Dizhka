@@ -28,7 +28,7 @@ function renderProducts(products, container, category = 'all') {
     const card = document.createElement('div')
     card.className = 'catalog__item'
     card.innerHTML = `
-      <img src="img/items/${product.image}" alt="${product.name}" class="catalog__img">
+      <img src="img/${product.image}" alt="${product.name}" class="catalog__img">
       <div class="catalog__info">
         <h3>${product.name}</h3>
         <p>${product.price} ₴</p>
