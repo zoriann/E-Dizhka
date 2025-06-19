@@ -22,7 +22,10 @@ function renderProducts(products, container, category = 'all') {
   const filtered =
     category === 'all'
       ? products
-      : products.filter((p) => p.category === category)
+      : products.filter(
+          (p) =>
+            p.category.trim().toLowerCase() === category.trim().toLowerCase()
+        )
 
   filtered.forEach((product) => {
     const card = document.createElement('div')
