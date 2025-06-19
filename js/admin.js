@@ -139,3 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetchProducts()
 })
+document.getElementById('imageFile').addEventListener('change', function () {
+  const fileNameSpan = document.getElementById('fileName')
+  const file = this.files[0]
+  if (file) {
+    fileNameSpan.textContent = file.name
+    fileNameSpan.style.color = '#fff' // Темний або яскравий текст
+  } else {
+    fileNameSpan.textContent = 'Файл не вибрано'
+  }
+})

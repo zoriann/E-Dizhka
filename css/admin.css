@@ -11,7 +11,7 @@ main.admin {
   padding: 2rem;
   background-color: #2e271d;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
 .admin h1 {
@@ -36,7 +36,7 @@ main.admin {
   color: #f9f4dc;
 }
 
-.admin__upload input[type="file"] {
+.admin__upload input[type='file'] {
   padding: 0.5rem;
   border-radius: 6px;
   background-color: #fffef9;
@@ -72,8 +72,8 @@ main.admin {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
-.admin__form input[type="text"],
-.admin__form input[type="number"] {
+.admin__form input[type='text'],
+.admin__form input[type='number'] {
   padding: 0.7rem 1rem;
   font-size: 1rem;
   border-radius: 6px;
@@ -207,7 +207,7 @@ main.admin {
   background-color: #c4a056;
 }
 
-.upload-label input[type="file"] {
+.upload-label input[type='file'] {
   position: absolute;
   left: 0;
   top: 0;
@@ -234,4 +234,35 @@ main.admin {
 
 .upload-btn:hover {
   background-color: #4a7632;
+}
+.upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.custom-upload {
+  background-color: #d4b36a;
+  color: #1a1610;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-upload input[type='file'] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+}
+
+#fileName {
+  color: #fef6d0;
+  font-weight: normal;
 }
