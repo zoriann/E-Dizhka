@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tableBody = document.getElementById('productTableBody')
   const toast = document.getElementById('toast')
   const fileInput = document.getElementById('imageFile')
-  const fileNameSpan = document.getElementById('fileName') // 👈 для стилізованого імені
+  const fileNameSpan = document.getElementById('fileName') 
 
   function showToast(message) {
     toast.textContent = message
