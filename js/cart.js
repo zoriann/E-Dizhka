@@ -1,42 +1,63 @@
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('cartItems')
-  const total = document.getElementById('totalPrice')
+  const totalElement = document.getElementById('totalPrice')
+  const clearBtn = document.getElementById('clearCart')
+  const confirmBtn = document.getElementById('confirmOrder')
+
   let cart = JSON.parse(localStorage.getItem('cart')) || []
 
   if (cart.length === 0) {
-    container.innerHTML = '<p>🛒 Кошик порожній</p>'
-    total.textContent = '0 ₴'
+    container.innerHTML = `
+      <div class="cart__empty">
+        <h3 class="cart__empty-title">🛒 Кошик порожній</h3>
+        <p class="cart__empty-text">Перейдіть до каталогу, щоб додати товари.</p>
+        <a href="catalog.html" class="catalog__link">← До каталогу</a>
+      </div>
+    `
+    totalElement.textContent = '0 ₴'
     return
   }
 
-  let sum = 0
-
+  let total = 0
   cart.forEach((item) => {
     const itemDiv = document.createElement('div')
     itemDiv.className = 'cart__item'
+
     itemDiv.innerHTML = `
-      <img src="img/${item.image}" alt="${item.name}" class="cart__img">
-      <div class="cart__info">
-        <h3>${item.name}</h3>
-        <p>${item.price} ₴ x ${item.quantity}</p>
-        <p><strong>${item.price * item.quantity} ₴</strong></p>
-        <button class="remove-btn" data-id="${item.id}">🗑 Видалити</button>
+      <div class="cart__item-info">
+        <span class="cart__item-name">${item.name}</span>
+        <span class="cart__item-price">${item.price} ₴ × ${item.quantity}</span>
       </div>
+      <button class="cart__item-remove" data-id="${item.id}">✖</button>
     `
+
     container.appendChild(itemDiv)
-    sum += item.price * item.quantity
+    total += item.price * item.quantity
   })
 
-  total.textContent = `${sum} ₴`
+  totalElement.textContent = `${total} ₴`
 
-  // Видалення з кошика
-  const removeButtons = document.querySelectorAll('.remove-btn')
-  removeButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id
+  // Видалення окремого товару
+  container.addEventListener('click', (e) => {
+    if (e.target.classList.contains('cart__item-remove')) {
+      const id = e.target.dataset.id
       cart = cart.filter((item) => item.id != id)
       localStorage.setItem('cart', JSON.stringify(cart))
-      location.reload() // перезавантажує сторінку, щоб оновити список
-    })
+      location.reload() // оновлення кошика
+    }
+  })
+
+  // Очистити кошик
+  clearBtn.addEventListener('click', () => {
+    localStorage.removeItem('cart')
+    location.reload()
+  })
+
+  // Підтвердження замовлення
+  confirmBtn.addEventListener('click', () => {
+    if (cart.length === 0) return
+    alert('✅ Замовлення підтверджено!')
+    localStorage.removeItem('cart')
+    location.reload()
   })
 })
