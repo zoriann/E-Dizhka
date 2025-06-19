@@ -190,3 +190,48 @@ main.admin {
   opacity: 1;
   pointer-events: auto;
 }
+.upload-label {
+  display: inline-block;
+  position: relative;
+  background-color: #d4b36a;
+  color: #1a1610;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-right: 1rem;
+}
+
+.upload-label:hover {
+  background-color: #c4a056;
+}
+
+.upload-label input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.upload-text {
+  pointer-events: none;
+}
+
+.upload-btn {
+  background-color: #5a8a3d;
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.upload-btn:hover {
+  background-color: #4a7632;
+}
