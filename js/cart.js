@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
   confirmBtn.addEventListener('click', () => {
     if (cart.length === 0) return
 
-    const orderNumber = generateOrderNumber()
+    const orderNumber = generateShortOrderNumber()
     showToast(
-      `✅ Замовлення №${orderNumber} обробляється. Ви зможете забрати його за 15 хв на касі.`
+      `✅ Замовлення №${orderNumber} прийнято! Ви зможете забрати його за 15 хв на касі.`
     )
     sendOrderToEmail(cart, orderNumber)
     localStorage.removeItem('cart')
@@ -63,16 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-function generateOrderNumber() {
-  const now = new Date()
-  return (
-    'Z' +
-    now.getFullYear().toString().slice(2) +
-    (now.getMonth() + 1).toString().padStart(2, '0') +
-    now.getDate().toString().padStart(2, '0') +
-    '-' +
-    Math.floor(1000 + Math.random() * 9000)
-  )
+function generateShortOrderNumber() {
+  const part1 = Math.floor(100 + Math.random() * 900)
+  const part2 = Math.floor(10 + Math.random() * 90)
+  return `Z${part1}-${part2}`
 }
 
 function showToast(message) {
