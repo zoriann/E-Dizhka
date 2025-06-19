@@ -128,3 +128,27 @@
   color: #d4b36a; /* Золотистий при наведенні */
   text-decoration: underline;
 }
+.toast {
+  visibility: hidden;
+  min-width: 300px;
+  margin: 0 auto;
+  background-color: #2e271d;
+  color: #fef6d0;
+  text-align: center;
+  border-radius: 0.5rem;
+  padding: 1.2rem;
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  font-weight: bold;
+  opacity: 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  transition: opacity 0.5s ease, bottom 0.5s ease;
+}
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+  bottom: 60px;
+}

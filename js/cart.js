@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   cart.forEach((item) => {
     const itemDiv = document.createElement('div')
     itemDiv.className = 'cart__item'
-
     itemDiv.innerHTML = `
       <div class="cart__item-info">
         <span class="cart__item-name">${item.name}</span>
@@ -30,34 +29,82 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <button class="cart__item-remove" data-id="${item.id}">✖</button>
     `
-
     container.appendChild(itemDiv)
     total += item.price * item.quantity
   })
 
   totalElement.textContent = `${total} ₴`
 
-  // Видалення окремого товару
   container.addEventListener('click', (e) => {
     if (e.target.classList.contains('cart__item-remove')) {
       const id = e.target.dataset.id
       cart = cart.filter((item) => item.id != id)
       localStorage.setItem('cart', JSON.stringify(cart))
-      location.reload() // оновлення кошика
+      location.reload()
     }
   })
 
-  // Очистити кошик
   clearBtn.addEventListener('click', () => {
     localStorage.removeItem('cart')
     location.reload()
   })
 
-  // Підтвердження замовлення
   confirmBtn.addEventListener('click', () => {
     if (cart.length === 0) return
-    alert('✅ Замовлення підтверджено!')
+
+    const orderNumber = generateOrderNumber()
+    showToast(
+      `✅ Замовлення №${orderNumber} обробляється. Ви зможете забрати його за 15 хв на касі.`
+    )
+    sendOrderToEmail(cart, orderNumber)
     localStorage.removeItem('cart')
-    location.reload()
+
+    setTimeout(() => location.reload(), 4000)
   })
 })
+
+function generateOrderNumber() {
+  const now = new Date()
+  return (
+    'Z' +
+    now.getFullYear().toString().slice(2) +
+    (now.getMonth() + 1).toString().padStart(2, '0') +
+    now.getDate().toString().padStart(2, '0') +
+    '-' +
+    Math.floor(1000 + Math.random() * 9000)
+  )
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast')
+  if (!toast) return
+
+  toast.textContent = message
+  toast.classList.add('show')
+  setTimeout(() => {
+    toast.classList.remove('show')
+  }, 4000)
+}
+
+function sendOrderToEmail(cart, orderNumber) {
+  const items = cart
+    .map(
+      (item) =>
+        `${item.name} x${item.quantity} — ${item.price * item.quantity}₴`
+    )
+    .join('\n')
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+
+  const message = `Нове замовлення №${orderNumber}:\n\n${items}\n\nЗагальна сума: ${total}₴`
+
+  emailjs
+    .send('service_7zgca0s', 'template_0q14kum', {
+      message: message,
+      order_number: orderNumber,
+    })
+    .then(
+      () => console.log('Замовлення надіслано'),
+      (error) => console.error('Помилка відправки:', error)
+    )
+}
