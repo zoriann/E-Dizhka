@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'https://diplombackend-production-a7f8.up.railway.app/api/upload'
 
   const form = document.getElementById('addProductForm')
+  const uploadForm = document.getElementById('uploadImageForm')
   const tableBody = document.getElementById('productTableBody')
   const toast = document.getElementById('toast')
 
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const row = document.createElement('tr')
     row.innerHTML = `
       <td><input type="text" value="${product.name}" data-field="name"></td>
-      <td><input type="text" value="${product.price}" data-field="price"></td>
+      <td><input type="number" value="${product.price}" data-field="price"></td>
       <td><input type="text" value="${product.category}" data-field="category"></td>
       <td><input type="text" value="${product.image}" data-field="image"></td>
       <td>
@@ -42,36 +43,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
-
     const name = form.name.value.trim()
     const price = parseFloat(form.price.value.trim())
     const category = form.category.value.trim()
-    const imageFile = form.imageFile.files[0]
+    const image = form.image.value.trim()
 
-    if (!name || !price || !category || !imageFile) {
+    if (!name || !price || !category || !image) {
       showToast('⚠️ Заповніть всі поля')
       return
     }
 
     try {
-      const formData = new FormData()
-      formData.append('image', imageFile)
-
-      const uploadRes = await fetch(UPLOAD_URL, {
-        method: 'POST',
-        body: formData,
-      })
-
-      const { filename } = await uploadRes.json()
-
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, price, category, image: filename }),
+        body: JSON.stringify({ name, price, category, image }),
       })
-
       if (!res.ok) throw new Error('❌ Помилка додавання')
-
       showToast('✅ Товар додано!')
       form.reset()
       fetchProducts()
@@ -119,6 +107,33 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error(err)
         showToast('❌ Помилка при видаленні')
       }
+    }
+  })
+
+  uploadForm.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const fileInput = document.getElementById('imageFile')
+    const file = fileInput.files[0]
+    if (!file) {
+      showToast('⚠️ Оберіть файл для завантаження')
+      return
+    }
+
+    const formData = new FormData()
+    formData.append('image', file)
+
+    try {
+      const res = await fetch(UPLOAD_URL, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!res.ok) throw new Error('Помилка завантаження зображення')
+      showToast('📸 Зображення завантажено!')
+      uploadForm.reset()
+    } catch (err) {
+      console.error(err)
+      showToast('❌ Не вдалося завантажити зображення')
     }
   })
 

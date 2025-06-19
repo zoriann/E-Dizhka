@@ -1,24 +1,63 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #1a1610;
-  color: #fef6d0;
   margin: 0;
-  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1c1a15;
+  color: #f9f4dc;
 }
 
 main.admin {
-  max-width: 960px;
+  max-width: 1000px;
   margin: 2rem auto;
-  background-color: #2a251d;
   padding: 2rem;
+  background-color: #2e271d;
   border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
 }
 
-h1 {
+.admin h1 {
   text-align: center;
+  margin-bottom: 2.5rem;
+  color: #f0d87c;
+  font-size: 2.2rem;
+}
+
+.admin__upload {
+  background-color: #3a3225;
+  padding: 1rem 1.5rem;
   margin-bottom: 2rem;
-  color: #f0e68c;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.admin__upload label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #f9f4dc;
+}
+
+.admin__upload input[type="file"] {
+  padding: 0.5rem;
+  border-radius: 6px;
+  background-color: #fffef9;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.admin__upload button {
+  margin-top: 0.8rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #c49b35;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.admin__upload button:hover {
+  background-color: #a9822a;
 }
 
 .admin__form form {
@@ -29,141 +68,122 @@ h1 {
   background-color: #3a3225;
   padding: 1.5rem;
   border-radius: 8px;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
-.admin__form input[type='text'],
-.admin__form input[type='number'] {
-  padding: 0.6rem 0.8rem;
+.admin__form input[type="text"],
+.admin__form input[type="number"] {
+  padding: 0.7rem 1rem;
   font-size: 1rem;
-  border: 1px solid #777;
   border-radius: 6px;
-  width: 150px;
-  background-color: #fdfdfc;
+  border: 1px solid #888;
+  width: 180px;
+  background-color: #fcfcf8;
   color: #000;
+}
+
+.admin__form input::placeholder {
+  color: #999;
 }
 
 .admin__form button {
-  padding: 0.6rem 1.2rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  background-color: #c49b35;
+  background-color: #d4a02a;
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.25s ease;
+  transition: background-color 0.3s ease;
   align-self: center;
-  margin-top: auto;
 }
 
 .admin__form button:hover {
-  background-color: #a67c2e;
+  background-color: #b78524;
 }
 
-.admin__upload {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #3a3225;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 1rem auto 2rem;
-  max-width: 480px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-.admin__upload input[type='file'] {
-  padding: 0.4rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  background-color: #f4f0e0;
-  border: 1px solid #777;
-  margin-bottom: 0.8rem;
-  color: #000;
-}
-
-.admin__upload button {
-  padding: 0.5rem 1rem;
-  background-color: #c49b35;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-
-.admin__upload button:hover {
-  background-color: #a67c2e;
+.admin__product-list h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #ead89c;
+  text-align: center;
 }
 
 .admin__table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #332d22;
+  background-color: #1f1b15;
+  color: #fef6d0;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .admin__table th,
 .admin__table td {
-  padding: 0.75rem;
+  padding: 0.8rem;
   text-align: left;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #3c352a;
 }
 
 .admin__table th {
-  background-color: #3e3628;
+  background-color: #3e3629;
   color: #f9f4dc;
+  font-weight: bold;
 }
 
-.admin__table input[type='text'] {
+.admin__table td input {
   width: 100%;
-  padding: 0.4rem;
-  background-color: #1c1a15;
-  color: #fff;
-  border: 1px solid #555;
-  border-radius: 4px;
-}
-
-button.edit-btn,
-button.delete-btn {
+  padding: 0.5rem;
+  background-color: #322c22;
+  color: #fef6d0;
   border: none;
   border-radius: 4px;
-  padding: 0.4rem 0.6rem;
-  margin: 0 0.2rem;
+}
+
+.admin__table button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  margin-right: 0.3rem;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.admin__table .edit-btn {
+  background-color: #4caf50;
   color: #fff;
 }
 
-button.edit-btn {
-  background-color: #4caf50;
+.admin__table .edit-btn:hover {
+  background-color: #3d9442;
 }
 
-button.edit-btn:hover {
-  background-color: #3f9443;
+.admin__table .delete-btn {
+  background-color: #d9534f;
+  color: #fff;
 }
 
-button.delete-btn {
-  background-color: #c62828;
-}
-
-button.delete-btn:hover {
-  background-color: #a62121;
+.admin__table .delete-btn:hover {
+  background-color: #c9302c;
 }
 
 .toast {
   position: fixed;
-  bottom: 1rem;
+  bottom: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #d4b36a;
-  color: #1a1610;
+  background-color: #333;
+  color: #fff;
   padding: 1rem 2rem;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-weight: bold;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 9999;
-  font-weight: bold;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
 }
 
 .toast.show {

@@ -28,33 +28,46 @@
     </header>
     <main class="admin">
       <h1>Панель адміністратора</h1>
-  
-      <section class="admin__form">
-        <form id="addProductForm">
-          <input type="text" id="name" name="name" placeholder="Назва товару" />
-          <input type="number" id="price" name="price" placeholder="Ціна" />
-          <input type="text" id="category" name="category" placeholder="Категорія" />
-          <input type="file" id="imageFile" name="image" accept="image/*" />
-          <button type="submit" id="addProduct">Додати товар</button>
+    
+      <section class="admin__upload">
+        <form id="uploadImageForm" enctype="multipart/form-data">
+          <label for="imageFile">Завантажити зображення:</label>
+          <input type="file" id="imageFile" name="image" accept="image/*" required>
+          <button type="submit">Завантажити</button>
         </form>
       </section>
-  
-      <h2>Усі товари</h2>
-      <table class="admin__table">
-        <thead>
-          <tr>
-            <th>Назва</th>
-            <th>Ціна</th>
-            <th>Категорія</th>
-            <th>Зображення</th>
-            <th>Дії</th>
-          </tr>
-        </thead>
-        <tbody id="productTableBody">
-          <!-- Продукти тут -->
-        </tbody>
-      </table>
+    
+      <section class="admin__form">
+        <form id="addProductForm">
+          <input type="text" id="name" placeholder="Назва товару" required>
+          <input type="number" id="price" placeholder="Ціна" required>
+          <input type="text" id="category" placeholder="Категорія" required>
+          <input type="text" id="image" placeholder="Назва зображення (наприклад: beer.png)" required>
+          <button type="submit">Додати товар</button>
+        </form>
+      </section>
+    
+      <section class="admin__product-list">
+        <h2>Усі товари</h2>
+        <table class="admin__table">
+          <thead>
+            <tr>
+              <th>Назва</th>
+              <th>Ціна</th>
+              <th>Категорія</th>
+              <th>Зображення</th>
+              <th>Дії</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody">
+            <!-- Продукти зʼявляться тут -->
+          </tbody>
+        </table>
+      </section>
+    
+      <div id="toast" class="toast"></div>
     </main>
+    
     <footer class="footer">
       <div class="footer__inner">
         <div class="footer__about">
