@@ -272,3 +272,48 @@ button.delete-btn {
   opacity: 1;
   pointer-events: auto;
 }
+.admin__form form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  background-color: #3a3225;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.admin__form input[type="text"],
+.admin__form input[type="number"],
+.admin__form input[type="file"] {
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #777;
+  border-radius: 6px;
+  width: 220px;
+  background-color: #fdfdfc;
+  color: #000;
+}
+
+.admin__form input[type="file"] {
+  background-color: #f4f0e0;
+  padding: 0.4rem;
+}
+
+.admin__form button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #c49b35;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  align-self: center;
+  margin-top: auto;
+}
+
+.admin__form button:hover {
+  background-color: #a67c2e;
+}
