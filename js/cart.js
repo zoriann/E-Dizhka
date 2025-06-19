@@ -93,7 +93,7 @@ function sendOrderToEmail(cart, orderNumber) {
   const message = `Нове замовлення №${orderNumber}:\n\n${items}\n\nЗагальна сума: ${total}₴`
 
   emailjs
-    .send('service_7zgca0s', 'template_0q14kum', {
+    .send('service_7zgca0s', 'template_44a7itl', {
       message: message,
       order_number: orderNumber,
     })
