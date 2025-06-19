@@ -26,24 +26,33 @@
         </div>
       </div>
     </header>
-    <div class="admin">
+    <main class="admin">
       <h1>Панель адміністратора</h1>
-
+  
       <section class="admin__form">
         <input type="text" id="name" placeholder="Назва товару" />
         <input type="number" id="price" placeholder="Ціна" />
         <input type="text" id="category" placeholder="Категорія" />
-        <input
-          type="text"
-          id="image"
-          placeholder="Назва зображення (наприклад, beer.png)"
-        />
+        <input type="text" id="image" placeholder="Назва зображення (наприклад, beer.png)" />
         <button id="addProduct">Додати товар</button>
       </section>
-
+  
       <h2>Усі товари</h2>
-      <div id="productList" class="admin__list"></div>
-    </div>
+      <table class="admin__table">
+        <thead>
+          <tr>
+            <th>Назва</th>
+            <th>Ціна</th>
+            <th>Категорія</th>
+            <th>Зображення</th>
+            <th>Дії</th>
+          </tr>
+        </thead>
+        <tbody id="productTable">
+          <!-- Продукти  тут -->
+        </tbody>
+      </table>
+    </main>
     <footer class="footer">
       <div class="footer__inner">
         <div class="footer__about">
@@ -76,7 +85,8 @@
         <p>© 2025 Діжка Пива. Усі права захищено.</p>
       </div>
     </footer>
-
-    <script src="admin.js"></script>
+    <div id="toast" class="toast"></div>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="js/admin.js"></script>
   </body>
 </html>

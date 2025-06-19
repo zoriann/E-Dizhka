@@ -1,94 +1,110 @@
-const API = 'https://diplombackend-production-a7f8.up.railway.app/api/products'
-
 document.addEventListener('DOMContentLoaded', () => {
-  loadProducts()
+  const API_URL =
+    'https://diplombackend-production-a7f8.up.railway.app/api/products'
+  const form = document.getElementById('addProductForm')
+  const tableBody = document.getElementById('productTableBody')
+  const toast = document.getElementById('toast')
 
-  document.getElementById('addProduct').addEventListener('click', async () => {
-    const name = document.getElementById('name').value.trim()
-    const price = +document.getElementById('price').value
-    const category = document.getElementById('category').value.trim()
-    const image = document.getElementById('image').value.trim()
+  function showToast(message) {
+    toast.textContent = message
+    toast.classList.add('show')
+    setTimeout(() => toast.classList.remove('show'), 4000)
+  }
+
+  async function fetchProducts() {
+    try {
+      const res = await fetch(API_URL)
+      const products = await res.json()
+      tableBody.innerHTML = ''
+      products.forEach(createProductRow)
+    } catch (err) {
+      console.error('Помилка при завантаженні товарів:', err)
+    }
+  }
+
+  function createProductRow(product) {
+    const row = document.createElement('tr')
+    row.innerHTML = `
+      <td><input type="text" value="${product.name}" data-field="name"></td>
+      <td><input type="text" value="${product.price}" data-field="price"></td>
+      <td><input type="text" value="${product.category}" data-field="category"></td>
+      <td><input type="text" value="${product.image}" data-field="image"></td>
+      <td>
+        <button class="edit-btn" data-id="${product.id}">💾</button>
+        <button class="delete-btn" data-id="${product.id}">🗑</button>
+      </td>
+    `
+    tableBody.appendChild(row)
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const name = form.name.value.trim()
+    const price = parseFloat(form.price.value.trim())
+    const category = form.category.value.trim()
+    const image = form.image.value.trim()
 
     if (!name || !price || !category || !image) {
-      alert('❗ Всі поля обовʼязкові')
+      showToast('⚠️ Заповніть всі поля')
       return
     }
 
-    const newProduct = { name, price, category, image }
-
-    await fetch(API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newProduct),
-    })
-
-    clearForm()
-    loadProducts()
-  })
-})
-
-async function loadProducts() {
-  const list = document.getElementById('productList')
-  list.innerHTML = 'Завантаження...'
-
-  const res = await fetch(API)
-  const products = await res.json()
-
-  list.innerHTML = ''
-  products.forEach((p) => {
-    const item = document.createElement('div')
-    item.className = 'admin__item'
-    item.innerHTML = `
-      <input type="text" value="${p.name}" class="edit-name" />
-      <input type="number" value="${p.price}" class="edit-price" />
-      <input type="text" value="${p.category}" class="edit-category" />
-      <input type="text" value="${p.image}" class="edit-image" />
-      <div>
-        <button class="save-btn" data-id="${p.id}">💾 Зберегти</button>
-        <button class="delete-btn" data-id="${p.id}">🗑 Видалити</button>
-      </div>
-    `
-    list.appendChild(item)
-  })
-
-  document.querySelectorAll('.delete-btn').forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const id = btn.dataset.id
-      await fetch(`${API}/${id}`, { method: 'DELETE' })
-      loadProducts()
-    })
-  })
-
-  document.querySelectorAll('.save-btn').forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const id = btn.dataset.id
-      const item = btn.closest('.admin__item')
-      const name = item.querySelector('.edit-name').value.trim()
-      const price = +item.querySelector('.edit-price').value
-      const category = item.querySelector('.edit-category').value.trim()
-      const image = item.querySelector('.edit-image').value.trim()
-
-      if (!name || !price || !category || !image) {
-        alert('❗ Заповни всі поля')
-        return
-      }
-
-      const updatedProduct = { name, price, category, image }
-
-      await fetch(`${API}/${id}`, {
-        method: 'PUT',
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedProduct),
+        body: JSON.stringify({ name, price, category, image }),
+      })
+      if (!res.ok) throw new Error('❌ Помилка додавання')
+      showToast('✅ Товар додано!')
+      form.reset()
+      fetchProducts()
+    } catch (err) {
+      console.error(err)
+      showToast('❌ Помилка при додаванні')
+    }
+  })
+
+  tableBody.addEventListener('click', async (e) => {
+    const id = e.target.dataset.id
+    const row = e.target.closest('tr')
+    const inputs = row.querySelectorAll('input')
+
+    if (e.target.classList.contains('edit-btn')) {
+      const updated = {}
+      inputs.forEach((input) => {
+        updated[input.dataset.field] = input.value
       })
 
-      loadProducts()
-    })
-  })
-}
+      try {
+        const res = await fetch(`${API_URL}/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated),
+        })
+        if (!res.ok) throw new Error('❌ Помилка оновлення')
+        showToast('✅ Товар оновлено!')
+        fetchProducts()
+      } catch (err) {
+        console.error(err)
+        showToast('❌ Помилка при оновленні')
+      }
+    }
 
-function clearForm() {
-  document.getElementById('name').value = ''
-  document.getElementById('price').value = ''
-  document.getElementById('category').value = ''
-  document.getElementById('image').value = ''
-}
+    if (e.target.classList.contains('delete-btn')) {
+      try {
+        const res = await fetch(`${API_URL}/${id}`, {
+          method: 'DELETE',
+        })
+        if (!res.ok) throw new Error('❌ Помилка видалення')
+        showToast('🗑 Товар видалено')
+        fetchProducts()
+      } catch (err) {
+        console.error(err)
+        showToast('❌ Помилка при видаленні')
+      }
+    }
+  })
+
+  fetchProducts()
+})
