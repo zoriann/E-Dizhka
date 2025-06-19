@@ -547,3 +547,45 @@ body {
   border-top: 1px solid #2d2a23;
   padding-top: 1rem;
 }
+.popular__grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.itemBox {
+  background: #1e1a14;
+  border: 1px solid #413828;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: #fef6d0;
+  text-align: center;
+}
+
+.itemBox__img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.itemBox__name {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.itemBox__price {
+  font-size: 1.1rem;
+  color: #d4b36a;
+}
+
+.itemBox__addbtn {
+  background: #d4b36a;
+  color: #1e1a14;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.6rem 1.2rem;
+  margin-top: 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+}
