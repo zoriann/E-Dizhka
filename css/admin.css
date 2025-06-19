@@ -1,0 +1,57 @@
+body {
+    font-family: sans-serif;
+    background: #f7f2e4;
+    padding: 2rem;
+  }
+  .admin {
+    max-width: 700px;
+    margin: auto;
+  }
+  .admin__form input {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    width: 100%;
+  }
+  .admin__form button {
+    padding: 0.6rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    background-color: #d4b36a;
+    border: none;
+    cursor: pointer;
+  }
+  .admin__list {
+    margin-top: 2rem;
+  }
+  .admin__item {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .admin__item button {
+    background: #b94444;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
+  .admin__item input {
+    width: 100%;
+    margin-bottom: 0.3rem;
+    padding: 0.4rem;
+    font-size: 0.95rem;
+  }
+  
+  .admin__item {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
