@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const API_URL =
     'https://diplombackend-production-a7f8.up.railway.app/api/products'
+  const UPLOAD_URL =
+    'https://diplombackend-production-a7f8.up.railway.app/api/upload'
+
   const form = document.getElementById('addProductForm')
   const tableBody = document.getElementById('productTableBody')
   const toast = document.getElementById('toast')
@@ -39,23 +42,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
+
     const name = form.name.value.trim()
     const price = parseFloat(form.price.value.trim())
     const category = form.category.value.trim()
-    const image = form.image.value.trim()
+    const imageFile = form.imageFile.files[0]
 
-    if (!name || !price || !category || !image) {
+    if (!name || !price || !category || !imageFile) {
       showToast('⚠️ Заповніть всі поля')
       return
     }
 
     try {
+      const formData = new FormData()
+      formData.append('image', imageFile)
+
+      const uploadRes = await fetch(UPLOAD_URL, {
+        method: 'POST',
+        body: formData,
+      })
+
+      const { filename } = await uploadRes.json()
+
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, price, category, image }),
+        body: JSON.stringify({ name, price, category, image: filename }),
       })
+
       if (!res.ok) throw new Error('❌ Помилка додавання')
+
       showToast('✅ Товар додано!')
       form.reset()
       fetchProducts()
