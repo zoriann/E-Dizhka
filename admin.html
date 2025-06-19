@@ -28,15 +28,21 @@
     </header>
     <main class="admin">
       <h1>Панель адміністратора</h1>
-  
+
       <section class="admin__form">
         <input type="text" id="name" placeholder="Назва товару" />
         <input type="number" id="price" placeholder="Ціна" />
         <input type="text" id="category" placeholder="Категорія" />
-        <input type="text" id="image" placeholder="Назва зображення (наприклад, beer.png)" />
-        <button id="addProduct">Додати товар</button>
+        <input
+          type="text"
+          id="image"
+          placeholder="Назва зображення (наприклад, beer.png)"
+        />
+        <form id="addProductForm">
+          <!-- Всі input-и та кнопка всередині -->
+        </form>
       </section>
-  
+
       <h2>Усі товари</h2>
       <table class="admin__table">
         <thead>
