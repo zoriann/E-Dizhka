@@ -11,7 +11,7 @@ main.admin {
   padding: 2rem;
   background-color: #2e271d;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
 .admin h1 {
@@ -36,7 +36,7 @@ main.admin {
   color: #f9f4dc;
 }
 
-.admin__upload input[type="file"] {
+.admin__upload input[type='file'] {
   padding: 0.5rem;
   border-radius: 6px;
   background-color: #fffef9;
@@ -72,8 +72,8 @@ main.admin {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
-.admin__form input[type="text"],
-.admin__form input[type="number"] {
+.admin__form input[type='text'],
+.admin__form input[type='number'] {
   padding: 0.7rem 1rem;
   font-size: 1rem;
   border-radius: 6px;
@@ -207,7 +207,7 @@ main.admin {
   background-color: #c4a056;
 }
 
-.upload-label input[type="file"] {
+.upload-label input[type='file'] {
   position: absolute;
   left: 0;
   top: 0;
@@ -234,4 +234,41 @@ main.admin {
 
 .upload-btn:hover {
   background-color: #4a7632;
+}
+.admin__upload {
+  background-color: #3a3225;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.admin__upload label {
+  display: block;
+  font-size: 1.1rem;
+  color: #fef6d0;
+  margin-bottom: 0.5rem;
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.file-upload input[type='file'] {
+  padding: 0.4rem;
+  font-size: 1rem;
+  background-color: #fdfdfc;
+  color: #1a1610;
+  border-radius: 6px;
+  border: 1px solid #777;
+  cursor: pointer;
+}
+
+#fileName {
+  font-size: 1rem;
+  color: #fef6d0;
+  font-weight: 500;
 }

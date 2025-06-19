@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const uploadForm = document.getElementById('uploadImageForm')
   const tableBody = document.getElementById('productTableBody')
   const toast = document.getElementById('toast')
+  const fileInput = document.getElementById('imageFile')
+  const fileNameSpan = document.getElementById('fileName') // 👈 для стилізованого імені
 
   function showToast(message) {
     toast.textContent = message
@@ -112,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   uploadForm.addEventListener('submit', async (e) => {
     e.preventDefault()
-    const fileInput = document.getElementById('imageFile')
     const file = fileInput.files[0]
     if (!file) {
       showToast('⚠️ Оберіть файл для завантаження')
@@ -131,10 +132,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!res.ok) throw new Error('Помилка завантаження зображення')
       showToast('📸 Зображення завантажено!')
       uploadForm.reset()
+      fileNameSpan.textContent = '' 
     } catch (err) {
       console.error(err)
       showToast('❌ Не вдалося завантажити зображення')
     }
+  })
+
+  fileInput.addEventListener('change', function () {
+    const file = this.files[0]
+    fileNameSpan.textContent = file ? file.name : ''
   })
 
   fetchProducts()
